@@ -7,6 +7,8 @@ public class ShotController : MonoBehaviour
     public GameObject tiroPreFab;
     public float forceSpeedFire;
     public bool isPlayer;
+    private float currentTime;
+    public float shootInterval;
 
     // Start is called before the first frame update
     void Start()
@@ -17,10 +19,17 @@ public class ShotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1") && isPlayer)
-        {
-            Atirar();
-        }
+
+        currentTime += Time.deltaTime;
+
+         if (Input.GetButton("Fire1") && isPlayer)
+         {
+            if (currentTime >= shootInterval)
+            {
+               currentTime = 0;
+                Atirar();
+            }
+         }
     }
 
     public void Atirar()
